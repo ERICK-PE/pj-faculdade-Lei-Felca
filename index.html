@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lei Felca</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -86,7 +87,9 @@
       <p>Responda as perguntas para testar o que voce aprendeu sobre o tema.</p>
 
       <form id="quiz-form">
-        <article>
+        <p id="quiz-progresso" class="quiz-progresso" aria-live="polite">Pergunta 1 de 5</p>
+
+        <article class="quiz-pergunta" data-pergunta="pergunta-1">
           <h3>1. Qual e o principal objetivo da Lei Felca?</h3>
           <label>
             <input type="radio" name="pergunta-1" value="a">
@@ -102,7 +105,7 @@
           </label>
         </article>
 
-        <article>
+        <article class="quiz-pergunta" data-pergunta="pergunta-2">
           <h3>2. Por que a lei ficou conhecida como Lei Felca?</h3>
           <label>
             <input type="radio" name="pergunta-2" value="a">
@@ -118,7 +121,7 @@
           </label>
         </article>
 
-        <article>
+        <article class="quiz-pergunta" data-pergunta="pergunta-3">
           <h3>3. O que muda na verificacao de idade?</h3>
           <label>
             <input type="radio" name="pergunta-3" value="a">
@@ -134,7 +137,7 @@
           </label>
         </article>
 
-        <article>
+        <article class="quiz-pergunta" data-pergunta="pergunta-4">
           <h3>4. Segundo o site, o que acontece com loot boxes para menores?</h3>
           <label>
             <input type="radio" name="pergunta-4" value="a">
@@ -150,10 +153,25 @@
           </label>
         </article>
 
-        <button type="submit">Ver resultado</button>
+        <article class="quiz-pergunta" data-pergunta="pergunta-5">
+          <h3>5. O que a lei busca impedir sobre dados de criancas e adolescentes?</h3>
+          <label>
+            <input type="radio" name="pergunta-5" value="a">
+            O uso de dados pessoais para anuncios direcionados por comportamento.
+          </label>
+          <label>
+            <input type="radio" name="pergunta-5" value="b">
+            O uso de qualquer conteudo educativo em plataformas digitais.
+          </label>
+          <label>
+            <input type="radio" name="pergunta-5" value="c">
+            O acesso dos pais ao controle de contas de menores.
+          </label>
+        </article>
       </form>
 
       <p id="quiz-resultado" aria-live="polite"></p>
+      <button id="quiz-reiniciar" class="quiz-reiniciar" type="button">Reiniciar</button>
     </section>
   </main>
 

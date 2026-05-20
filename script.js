@@ -1,23 +1,43 @@
 class QuizLeiFelca {
-  constructor(formId, resultadoId) {
+  constructor(formId, resultadoId, progressoId, reiniciarId) {
     this.form = document.getElementById(formId);
     this.resultado = document.getElementById(resultadoId);
+    this.progresso = document.getElementById(progressoId);
+    this.botaoReiniciar = document.getElementById(reiniciarId);
     this.respostasCorretas = {
       'pergunta-1': 'a',
       'pergunta-2': 'b',
       'pergunta-3': 'b',
       'pergunta-4': 'c',
+      'pergunta-5': 'a',
     };
+    this.perguntas = [];
+    this.perguntaAtual = 0;
+    this.respostasUsuario = {};
   }
 
   iniciar() {
-    if (!this.form || !this.resultado) {
+    if (!this.form || !this.resultado || !this.progresso || !this.botaoReiniciar) {
       return;
     }
 
+    this.perguntas = Array.from(this.form.querySelectorAll('.quiz-pergunta'));
+    this.mostrarPerguntaAtual();
+
     this.form.addEventListener('submit', (event) => {
       event.preventDefault();
-      this.mostrarResultado();
+    });
+
+    this.form.addEventListener('change', (event) => {
+      if (!event.target.matches('input[type="radio"]')) {
+        return;
+      }
+
+      this.registrarResposta(event.target);
+    });
+
+    this.botaoReiniciar.addEventListener('click', () => {
+      this.reiniciar();
     });
   }
 
@@ -25,9 +45,7 @@ class QuizLeiFelca {
     let pontuacao = 0;
 
     Object.entries(this.respostasCorretas).forEach(([pergunta, respostaCorreta]) => {
-      const respostaSelecionada = this.form.querySelector(`input[name="${pergunta}"]:checked`);
-
-      if (respostaSelecionada && respostaSelecionada.value === respostaCorreta) {
+      if (this.respostasUsuario[pergunta] === respostaCorreta) {
         pontuacao += 1;
       }
     });
@@ -52,8 +70,96 @@ class QuizLeiFelca {
   mostrarResultado() {
     const pontuacao = this.calcularPontuacao();
     this.resultado.textContent = this.criarMensagem(pontuacao);
+    this.progresso.textContent = 'Resultado final';
+    this.form.classList.add('quiz-revisao');
+
+    this.perguntas.forEach((pergunta) => {
+      this.mostrarRevisaoDaPergunta(pergunta);
+      pergunta.hidden = false;
+    });
+  }
+
+  mostrarPerguntaAtual() {
+    this.perguntas.forEach((pergunta, indice) => {
+      pergunta.hidden = indice !== this.perguntaAtual;
+      pergunta.classList.toggle('pergunta-ativa', indice === this.perguntaAtual);
+      pergunta.classList.remove('pergunta-correta', 'pergunta-incorreta');
+    });
+
+    this.progresso.textContent = `Pergunta ${this.perguntaAtual + 1} de ${this.perguntas.length}`;
+  }
+
+  registrarResposta(campo) {
+    const perguntaAtual = this.perguntas[this.perguntaAtual];
+    const nomePergunta = campo.name;
+
+    this.respostasUsuario[nomePergunta] = campo.value;
+    this.travarPergunta(perguntaAtual);
+
+    window.setTimeout(() => {
+      if (this.perguntaAtual < this.perguntas.length - 1) {
+        this.perguntaAtual += 1;
+        this.mostrarPerguntaAtual();
+        return;
+      }
+
+      this.mostrarResultado();
+    }, 260);
+  }
+
+  travarPergunta(pergunta) {
+    pergunta.querySelectorAll('input[type="radio"]').forEach((input) => {
+      input.disabled = true;
+    });
+  }
+
+  liberarPerguntas() {
+    this.perguntas.forEach((pergunta) => {
+      pergunta.hidden = false;
+      pergunta.classList.remove('pergunta-ativa', 'pergunta-correta', 'pergunta-incorreta');
+      pergunta.querySelectorAll('input[type="radio"]').forEach((input) => {
+        input.disabled = false;
+        input.checked = false;
+      });
+      pergunta.querySelector('.quiz-feedback')?.remove();
+    });
+  }
+
+  mostrarRevisaoDaPergunta(pergunta) {
+    const nomePergunta = pergunta.dataset.pergunta;
+    const respostaUsuario = this.respostasUsuario[nomePergunta];
+    const respostaCorreta = this.respostasCorretas[nomePergunta];
+    const acertou = respostaUsuario === respostaCorreta;
+    const textoCorreto = this.obterTextoDaResposta(nomePergunta, respostaCorreta);
+
+    pergunta.classList.toggle('pergunta-correta', acertou);
+    pergunta.classList.toggle('pergunta-incorreta', !acertou);
+
+    const feedback = document.createElement('p');
+    feedback.className = 'quiz-feedback';
+    feedback.textContent = acertou
+      ? 'Correta.'
+      : `Incorreta. Resposta certa: ${textoCorreto}`;
+
+    pergunta.appendChild(feedback);
+  }
+
+  obterTextoDaResposta(nomePergunta, valor) {
+    const inputCorreto = this.form.querySelector(`input[name="${nomePergunta}"][value="${valor}"]`);
+    const label = inputCorreto?.closest('label');
+
+    return label ? label.textContent.trim() : valor;
+  }
+
+  reiniciar() {
+    this.perguntaAtual = 0;
+    this.respostasUsuario = {};
+    this.resultado.textContent = '';
+    this.form.classList.remove('quiz-revisao');
+    this.liberarPerguntas();
+    this.mostrarPerguntaAtual();
   }
 }
 
-const quiz = new QuizLeiFelca('quiz-form', 'quiz-resultado');
+const quiz = new QuizLeiFelca('quiz-form', 'quiz-resultado', 'quiz-progresso', 'quiz-reiniciar');
 quiz.iniciar();
