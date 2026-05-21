@@ -161,5 +161,47 @@ class QuizLeiFelca {
   }
 }
 
+class RegulacaoTecnologia {
+  constructor(secaoId) {
+    this.secao = document.getElementById(secaoId);
+    this.botoes = [];
+    this.paineis = [];
+  }
+
+  iniciar() {
+    if (!this.secao) {
+      return;
+    }
+
+    this.botoes = Array.from(this.secao.querySelectorAll('[data-regulacao-alvo]'));
+    this.paineis = Array.from(this.secao.querySelectorAll('.regulacao-painel'));
+
+    this.botoes.forEach((botao) => {
+      botao.addEventListener('click', () => {
+        this.selecionarPainel(botao.dataset.regulacaoAlvo);
+      });
+    });
+
+    if (this.botoes.length > 0) {
+      this.selecionarPainel(this.botoes[0].dataset.regulacaoAlvo);
+    }
+  }
+
+  selecionarPainel(painelId) {
+    this.paineis.forEach((painel) => {
+      painel.hidden = painel.id !== painelId;
+    });
+
+    this.botoes.forEach((botao) => {
+      const selecionado = botao.dataset.regulacaoAlvo === painelId;
+      botao.classList.toggle('regulacao-botao-ativo', selecionado);
+      botao.setAttribute('aria-expanded', String(selecionado));
+    });
+  }
+}
+
+const regulacaoTecnologia = new RegulacaoTecnologia('regular-acesso-tecnologia');
+regulacaoTecnologia.iniciar();
+
 const quiz = new QuizLeiFelca('quiz-form', 'quiz-resultado', 'quiz-progresso', 'quiz-reiniciar');
 quiz.iniciar();

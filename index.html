@@ -62,6 +62,74 @@
       </p>
     </section>
 
+    <section id="regular-acesso-tecnologia">
+      <h2>Como regular o acesso das criancas a tecnologia</h2>
+      <p>
+        Escolha um tipo de tecnologia para ver medidas praticas de controle, seguranca e acompanhamento.
+      </p>
+
+      <div class="regulacao-controles" aria-label="Tipos de tecnologia">
+        <button class="regulacao-botao-ativo" type="button" data-regulacao-alvo="regular-celular" aria-controls="regular-celular" aria-expanded="true">
+          Celular
+        </button>
+        <button type="button" data-regulacao-alvo="regular-computador" aria-controls="regular-computador" aria-expanded="false">
+          Computador
+        </button>
+        <button type="button" data-regulacao-alvo="regular-videogame" aria-controls="regular-videogame" aria-expanded="false">
+          Videogame
+        </button>
+        <button type="button" data-regulacao-alvo="regular-internet" aria-controls="regular-internet" aria-expanded="false">
+          Internet geral
+        </button>
+      </div>
+
+      <div class="regulacao-paineis">
+        <article id="regular-celular" class="regulacao-painel">
+          <h3>Celular / Smartphone</h3>
+          <ul>
+            <li>Definir horarios de uso, como evitar telas antes das refeicoes, apos as 21h ou antes da licao.</li>
+            <li>Ativar Tempo de Uso no iOS ou Bem-Estar Digital no Android para limitar apps, categorias e horarios.</li>
+            <li>Bloquear conteudos improprios com filtros no navegador e nas lojas de aplicativos.</li>
+            <li>Exigir senha para downloads e instalacoes de novos aplicativos.</li>
+            <li>Ativar o modo Nao Perturbe durante horario escolar e horario de sono.</li>
+            <li>Manter o celular fora do quarto a noite, com um local fixo para carregar os aparelhos.</li>
+          </ul>
+        </article>
+
+        <article id="regular-computador" class="regulacao-painel" hidden>
+          <h3>Computador / Notebook</h3>
+          <ul>
+            <li>Criar uma conta infantil separada no Windows ou macOS com restricoes adequadas.</li>
+            <li>Instalar ferramentas de controle parental, como Google Family Link, Qustodio ou Bark.</li>
+            <li>Filtrar sites no roteador para bloquear categorias inadequadas em dispositivos especificos.</li>
+            <li>Deixar o computador em local visivel, evitando uso isolado no quarto ou na cama.</li>
+            <li>Definir tempo maximo de tela por dia pelos controles do sistema operacional.</li>
+          </ul>
+        </article>
+
+        <article id="regular-videogame" class="regulacao-painel" hidden>
+          <h3>Videogame</h3>
+          <ul>
+            <li>Configurar controle parental nativo no PlayStation, Xbox ou Nintendo Switch.</li>
+            <li>Bloquear jogos acima da classificacao indicativa definida pelos responsaveis.</li>
+            <li>Limitar o tempo de jogo diretamente no console ou por aplicativo de controle.</li>
+            <li>Desativar compras dentro dos jogos e exigir senha separada para pagamentos.</li>
+            <li>Revisar recursos de chat e modo online para restringir contato com desconhecidos.</li>
+          </ul>
+        </article>
+
+        <article id="regular-internet" class="regulacao-painel" hidden>
+          <h3>Internet em geral</h3>
+          <ul>
+            <li>Ativar Google SafeSearch para filtrar resultados improprios nas pesquisas.</li>
+            <li>Configurar DNS familiar no roteador, como Cloudflare for Families ou OpenDNS Family Shield.</li>
+            <li>Conversar sobre seguranca digital, dados pessoais, fotos e contato com estranhos online.</li>
+            <li>Acompanhar redes sociais usadas pela crianca e revisar configuracoes de privacidade.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
     <section id="jogos-e-fontes">
       <h2>Impacto em jogos, anuncios e fontes</h2>
       <p>

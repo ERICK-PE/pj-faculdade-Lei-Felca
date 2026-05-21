@@ -106,6 +106,49 @@ ul {
   background: #f4fbf7;
 }
 
+#regular-acesso-tecnologia {
+  background: #ffffff;
+}
+
+.regulacao-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.regulacao-controles button {
+  background: #146144;
+}
+
+.regulacao-controles button:hover,
+.regulacao-controles .regulacao-botao-ativo {
+  background: #e8583d;
+}
+
+.regulacao-paineis {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.regulacao-painel {
+  padding: 22px;
+  border: 1px solid #d7eadf;
+  border-radius: 8px;
+  background: #f4fbf7;
+}
+
+.regulacao-painel[hidden] {
+  display: none;
+}
+
+.regulacao-painel h3 {
+  margin: 0 0 14px;
+  color: #146144;
+  font-size: 1.28rem;
+  letter-spacing: 0;
+}
+
 #quiz-lei-felca {
   background: #1e3a34;
   color: #ffffff;
@@ -258,6 +301,25 @@ input:focus-visible {
 
   section {
     padding: 24px 18px;
+  }
+
+  .regulacao-paineis {
+    height: 380px;
+    min-height: 0;
+    overflow-y: visible;
+  }
+
+  .regulacao-painel {
+    padding: 18px 16px;
+  }
+
+  .regulacao-painel ul {
+    padding-left: 18px;
+  }
+
+  .regulacao-painel li {
+    font-size: 0.98rem;
+    line-height: 1.6;
   }
 
   button {
