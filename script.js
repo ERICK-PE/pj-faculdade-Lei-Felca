@@ -164,6 +164,7 @@ class QuizLeiFelca {
 class RegulacaoTecnologia {
   constructor(secaoId) {
     this.secao = document.getElementById(secaoId);
+    this.containerPaineis = null;
     this.botoes = [];
     this.paineis = [];
   }
@@ -175,6 +176,7 @@ class RegulacaoTecnologia {
 
     this.botoes = Array.from(this.secao.querySelectorAll('[data-regulacao-alvo]'));
     this.paineis = Array.from(this.secao.querySelectorAll('.regulacao-painel'));
+    this.containerPaineis = this.secao.querySelector('.regulacao-paineis');
 
     this.botoes.forEach((botao) => {
       botao.addEventListener('click', () => {
@@ -191,6 +193,10 @@ class RegulacaoTecnologia {
     this.paineis.forEach((painel) => {
       painel.hidden = painel.id !== painelId;
     });
+
+    const painelSelecionado = this.secao.querySelector(`#${painelId}`);
+    const painelComVideo = Boolean(painelSelecionado?.querySelector('.video-celular, .video-regulacao'));
+    this.containerPaineis?.classList.toggle('regulacao-paineis-video', painelComVideo);
 
     this.botoes.forEach((botao) => {
       const selecionado = botao.dataset.regulacaoAlvo === painelId;
