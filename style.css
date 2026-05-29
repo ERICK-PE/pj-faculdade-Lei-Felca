@@ -24,6 +24,7 @@ a {
 }
 
 header {
+  position: relative;
   min-height: 92vh;
   display: flex;
   flex-direction: column;
@@ -32,6 +33,39 @@ header {
   background:
     linear-gradient(90deg, rgba(255, 253, 247, 0.96), rgba(255, 253, 247, 0.78), rgba(255, 253, 247, 0.34)),
     url("Felca.jpg") center right / cover;
+}
+
+.grupo-univinte {
+  position: absolute;
+  top: 28px;
+  right: clamp(18px, 7vw, 92px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: min(360px, calc(100% - 36px));
+  padding: 12px 14px;
+  border: 1px solid rgba(20, 97, 68, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.9);
+  color: #1e3a34;
+  box-shadow: 0 12px 28px rgba(30, 58, 52, 0.1);
+}
+
+.grupo-univinte img {
+  width: 86px;
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.grupo-univinte div {
+  display: grid;
+  gap: 2px;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+.grupo-univinte strong {
+  color: #146144;
 }
 
 header h1 {
@@ -147,6 +181,27 @@ ul {
   color: #146144;
   font-size: 1.28rem;
   letter-spacing: 0;
+}
+
+.video-celular {
+  width: min(100%, 360px);
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0f1815;
+}
+
+.video-celular iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-fallback {
+  max-width: 360px;
+  margin-top: 12px;
+  font-size: 0.95rem;
 }
 
 #quiz-lei-felca {
@@ -294,6 +349,17 @@ input:focus-visible {
       url("Felca.jpg") center top / cover;
   }
 
+  .grupo-univinte {
+    position: static;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+  }
+
+  .grupo-univinte img {
+    width: 74px;
+  }
+
   main {
     width: min(100% - 24px, 1120px);
     padding-top: 28px;
@@ -320,6 +386,11 @@ input:focus-visible {
   .regulacao-painel li {
     font-size: 0.98rem;
     line-height: 1.6;
+  }
+
+  .video-celular {
+    width: min(100%, 300px);
+    margin: 0 auto;
   }
 
   button {
